@@ -14,7 +14,7 @@
 ---- 
 Create Web Designs That Work Perfectly on Any Device—Simply and Beautifully! 
 
-创造可简而美地运行在任意设备的Web设计！
+创造可运行在任意设备的简而美地的Web设计！
 
 Billions of people access the web via smartphones, tablets, and devices of all types, using every imaginable interface and display. But they all want the same thing: the right information, right now, delivered in the most aesthetically pleasing way possible. Give them what they want with Responsive Mobile Design.
 
