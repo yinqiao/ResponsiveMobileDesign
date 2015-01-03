@@ -60,15 +60,28 @@ Coverage includes
 
 ## 评论1
 
-This is a great book and a very timely topic. What Web developer hasn't been recently asked to make their sites and apps more "mobile friendly"? Phil Dutson explores the ins and outs of making our designs work at every conceivable resolution and orientation, and he does so concisely even while staying very readable.
+This is a great book and a very timely topic. Why Web developer hasn't been recently asked to make their sites and apps more "mobile friendly"? Phil Dutson explores the ins and outs of making our designs work at every conceivable resolution and orientation, and he does so concisely even while staying very readable.
 
-Part 1 is all about layout. He makes sure you understand what content is and why it's important to distinguish it from site mechanics and UI. He follows this up with a strong case for "mobile first" design, then tackles everything you need to know to make such a layout happen, including grids, tables, and typography. The in-depth explanations of CSS's relative measurement values and media queries were something I appreciated especially, and I've already made use of my new-found expertise to greatly improve the responsiveness and usability of my own designs.
+这是一本好书，响应式是一个时下非常时髦的话题。为什么最近Web开发人员没有要求让他们的网站和应用程序更加“移动端友好化”？Phil Dutson探索了如何使我们的设计工作在每一个可以想象的分辨率和定位的来龙去脉，虽然他的做法简明扼要，但是扔保持很强的可读性。
+
+Part 1 is all about layout. He makes sure you understand what content is and why it's important to distinguish it from site mechanics and UI. He follows this up with a strong case for "mobile first" design, then tackles everything you need to know to make such a layout happen, including grids, tables, and typography. 
+
+The in-depth explanations of CSS's relative measurement values and media queries were something I appreciated especially, and I've already made use of my new-found expertise to greatly improve the responsiveness and usability of my own designs.
+
+第1部分是关于布局。Phil Dutson确保你理解内容是什么，以及将内容与网站力学和UI区别开来非常重要。接着举了一个强大的“手机第一”的设计案例，然后解决所有你需要了解的这种布局中的重要概念，包括网格、表和排版。
+我特别欣赏有深入解释的CSS的相关的测量值、媒体查询的部分内容，我已经用这些新技术大大提高了我自己的设计的响应性和可用性。
 
 Part 2 covers responsive media concerns. Ever wondered how to deliver images or video at the appropriate resolution for a target device? It's all here. The section closes up with a comprehensive look at image compression, including when to use different image types and utilities (many of them free) that you can acquire to convert and compress images. This is typical of Phil's approach throughout the book: he presents just enough theory to give you the bird's-eye view, then he details the practical steps that you can use to get the job done quickly and easily.
 
+第2部分介绍响应式媒体查询相关内容。你有想过如何提供适当分辨率的图像或视频给目标设备吗？这里有所以的技巧和方法。这节内容介绍了全面的图像压缩方法，包括何时使用不同的图像类型和实用程序（其中许多是免费的），你可以用于转换和压缩图像。这是Phil贯穿本书的典型方法：他提出了足够的理论给你整体概念，然后他详细描述了实际的步骤，你可以使用它来快速轻松地完成工作。
+
 Part 3 is all about performance. Here, the author explores ways you can customize the user experience in key ways for each target platform. Also covered are some of the more futuristic, emerging standards, such as web components for ultimate ease-of-development and code reusability. Techniques for device detection, optimizing delivery from the server side, and getting the most out of your development tools close out the section.
 
+第三部分是关于性能。在这部分，作者探索了为每个目标平台在关键方面定制用户体验。还介绍了一些未来、新兴的标准，例如web组件最终易于开发和代码的可重用性。本节最后介绍了技术设备检测、优化从服务器端交付，并优化你的开发工具。
+
 As a veteran of hundreds of technical texts, I also appreciate that the book has been delivered with a high level of professionalism. The language is clear, mistakes minimal-to-nonexistent, and the layout is clean. I highly recommend adding this tome to your collection if you want to deliver your content to as many devices (and people) as possible.
+
+作为一名阅读了数百本技术文本、经验丰富的人，我也欣赏这本书发表了高水平的职业精神。本书语言清晰，错误极少甚至没有，布局干净整洁。如果你想将你的内容尽可能多的设备(和人)，我强烈推荐将本册书加入你的收藏夹。
 
 ----
 ## 评论2
