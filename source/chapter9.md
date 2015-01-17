@@ -1,0 +1,240 @@
+## 第9章 响应式图片
+Designs will always be epic, iconic, and awe inspiring. However, when thinking about the medium that users will be viewing your design on, it might be best to save some of that awe for the details and content delivery speed.
+Using images that work on a variety of devices can be challenging. Luckily, you can start using some techniques and solutions to take your design into the future.
+
+
+
+Images Should Be Responsive
+It used to be that the most difficult part of exporting an image was deciding whether it worked better as a JPEG or GIF file. Those were simple days when it usually came down to determining the number of colors used and deciding whether transparency was important to me.
+Then came PNG files, the solution that delivered the grandeur and scope of JPEG files and also gave images crisp and pristine transparency. It was definitely a step up, and many designers and developers still rely heavily on using PNG files. However, the file size for large images still leaves something to be desired. PNG files offer the same number of colors as JPEG files, but the file size ends up being far greater than with JPEG files because of the lossless compression that PNG uses in many image-manipulation programs. You might be able to save space by switching to a lossy PNG file, but JPEG files will almost always be smaller when used on complex, high- color images. As designers and developers, we are now dealing with incorporating SVG files and WEBP files.
+All of these image formats are fantastic in their own respects, but the problem is dealing with them when they are too big or too small for the screen requesting them.
+To give you an understanding of why images need to be responsive, in this chapter, you learn about delivering images to the browser by means of scaling, using new image elements, and using JavaScript to serve the correct image.
+Delivering Images
+When you are dealing with mobile devices, the images that you choose to use are extremely important. Detail, clarity, and even the emotion you are attempting to evoke can be dramati- cally shifted when your image is squished or broken on the page.
+To give you a feel for what I am talking about, see Figure 9.1.
+In Figure 9.1, you can easily see both the climber in the middle and the crowd below. If you viewed this same image on a phone, the scene either would be zoomed in or would have to scale to fit, as in Figure 9.2.
+The image has been scaled so that everything is still visible, but this leaves less initial detail, especially on the climber, and might actually cause more visual confusion than would a differ- ent image.
+
+
+Figure 9.1 The image is viewed on a desktop with everything in good detail.
+
+Figure 9.2 When viewed on a phone, the scene is scaled to fit, making the subject more difficult to view.
+
+Leaving the visuals aside, what does this do for users who are attempting to download the images? Well, for starters, it slows them down. The original image used for Figures 9.1 and 9.2 is a JPG that comes out at 344KB. That certainly doesn’t sound like much, but when your site has 10 images of a similar size, you would be adding more than 3MB in images alone to what users have to download on their mobile devices, along with any JavaScript files and other data to view your site.
+
+
+Note
+3MB of data doesn’t sound very large when you have a fast broadband connection. However, that same 3MB of data can take up some time (as well as data) on wire- less plans. The following lists the time to download a 3MB image:
+■ 3G (1–4Mbps): 5–23 seconds
+■ LTE (5–10Mbps): 2–4 seconds
+■ DSL (1.5Mbps): 15 seconds
+Note that, even after downloading the image, the device still has to process and display the image. If you have multiple images, the time taken to load images will add up quickly.
+
+
+If you were able to serve a different image based on device size, this would not only save in file size, but it would also enable you to choose the art direction of the image. Figure 9.3 shows the image optimized for mobile users.
+Being able to choose exactly what is shown is helpful, and because this enables you to use a smaller image (this one is 49KB), you can be assured that the user will be able to download and view the image much faster.
+While on the subject of the file size of your images, it might be worth using the WEBP image format on your site. This format has a wide array of features and uses a different compression algorithm, enabling you to save anywhere from 7% to 50% of original picture size. Figure 9.4 shows WEBP and JPEG images.
+You have a few methods that you can employ to do what we have done here. In the next sec- tions, you learn first about image scaling, then about using the srcset attribute, and then about using the picture element.
+
+
+Figure 9.3 The visible portion of the image has changed for an optimal viewing experience on a mobile device.
+
+Figure 9.4 Using WEBP, the top image is 56KB; the JPG image on the bottom is 111KB.
+
+
+Image Scaling
+One of the most common—and also most misunderstood—“responsive” image techniques is the use of image scaling via the browser. This doesn’t involve any new images; it just requires a few lines of CSS. Applying the following in your CSS magically makes your images shrink to fit:
+img {
+max-width: 100%; height: auto;
+}
+Note that IE8 users will notice a spectacular amount of fail with this example; to fix it, you shouldapplywidth: 100%beforemax-width: 100%.Youshouldalsobeawarethat,by setting an image to have a width of 100%, the image might attempt to take up as much space as possible. This means potential stretching. To avoid this, be sure to put the image inside a container such as a <div> element that has a width already set.
+This will make all your images fit the screen they are viewed on, but it does nothing for file size. On top of the included file size, using large images and forcing the browser to scale can be CPU and memory intensive. That might not matter too much with your desktop or laptop computer, but it quickly becomes a very real problem when looking at rendering speed and power con- sumption on a mobile device.
+
+
+
+Tip
+If you are currently using image maps on your site, you will need to come up with a new solution. Because of the pixel-perfect mapping of image maps, images that are resized will no longer have targets in the places you expect. You can work around this by positioning invisible hot spots on the image by using a percentage for layout, but this is far from a bulletproof solution.
+
+
+I do not advocate the use of browser-resized images by giving the browser a large image and forcing it to handle scaling the displayed size as a standard practice in your design; however, it can be a last-minute solution to get you by until you can get the correct images or solution in place.
+Using Intrinsic Ratio
+Maybe this has happened to you: You’re browsing the web and start to load a page, but as you begin reading, the content is suddenly moved or shoved in a new direction as images are loaded. This is called page reflow and is caused by images being loaded in a place that did not already adjust the layout to handle them. Figure 9.5 shows a page before and after images are loaded, to illustrate this effect.
+
+
+Figure 9.5 Before images are loaded, text content is allowed to bunch up (left). After the image has loaded, the text moves below the image (right).
+
+
+You might be thinking, “Well, of course the text moved! I can’t define how the space of an image changes on every screen!” That’s true, you definitely cannot. However, if you know the ratio of that image, you can use a little trick to determine how much space the image will take up in this particular layout.
+Thierry Koblentz first talked about the intrinsic ratio on A List Apart in 2009 (http://alistapart. com/article/creating-intrinsic-ratios-for-video/). In the article, Thierry talks about using the intrinsic ratio for handling videos on websites. It also happens to work quite well for images that need to use a placeholder to stop page reflow.
+To see this in action, Figure 9.6 shows the same page, but with a plan for the page reflow by including space for the image by using the intrinsic ratio of the image. This is noticeable in com- parison to Figure 9.5 because the text “This text should appear below...” is not visible on the screen when the page initially loads; instead, you only see the “An image should appear below” as the page has now saved space to insert the image.
+
+
+Figure 9.6 Space has been reserved (left) for the image to load into (right).
+
+
+To figure out the intrinsic ratio, you need to know the aspect ratio of your image, divide the second number by the first, and use the result as padding on a container element.
+For example, if you have a 480x320px image, the aspect ratio is 3:2. Taking that ratio, you get the value of 2/3, or 66.67. With this number, you can now set up a container element that will be used as a placeholder for the image. The CSS looks like this:
+.wrapper {
+position: relative; padding-bottom: 66.67%; height: 0;
+}
+.image {
+position: absolute; top: 0;
+left: 0;
+width: 100%; height: 100%;
+}
+
+
+When using intrinsic ratios, you need to create multiple classes for each aspect ratio you use with your images. This way, you can have differently sized images and still have placeholders for them.
+The srcset Attribute
+If you have rather sanely decided that scaling images is not something you’d like to pursue, you might be interested in using the srcset attribute.
+This attribute is used with the img element and is quite elegant in the execution of choosing the correct image to display.
+Look at the following snippet:
+<img src="meh.jpg" alt="an image" />
+Yes, that is the ordinary way to add an image to your site. It has an src attribute that specifies which file to use (in this case, the aptly named meh.jpg), and the alt attribute enables you to add text that will appear if the image is unavailable, for text readers, and for similar uses.
+The following snippet has had the srcset attribute added:
+<img src="standard.jpg" alt="an image"
+srcset="small_480.jpg 480w, standard_768.jpg 768w,
+large_1024.jpg 1024w, large@2x.jpg 2x" />
+Tip
+Use a naming convention with your images. The previous snippet of srcset uses a bit of humor to help convey that you can use larger images with more detail as the screen gets larger, but you should not copy those naming standards. Attempt- ing to manage a large number of files with names that do not match will be tricky and, in the long run, not worth the stress. Using names such as hero_480.jpg and hero_480@2x.jpg is a much better system.
+You can see from the previous example snippet that the srcset attribute takes a list of comma-separated values. They might seem a little out of sorts at first, but at second glance, you should notice that there is a value ending with w after almost every image filename. That value tells the browser the size or limit of showing that image.
+
+
+
+
+
+That breaks down into the following:
+■ 0–480px screens will show small_480.jpg.
+■ 481–768px screens will show standard_768.jpg.
+■ 769–1024px screens will show large_1024.jpg.
+■ High-pixel-density screens will show large@2x.jpg.
+■ All other screens will use standard.jpg.
+This is a fantastic solution, but use it with careful planning to make sure that you are serving optimized images to the correct devices. Having a fallback image is nice, but it could leave you with an image that is either too small or too large to fit the device that triggered the fallback.
+You might also want to be careful when using the element because it has been implemented only in WebKit-based browsers and Chrome 34+.
+With a little luck, other browsers will start supporting the attribute soon. If you find that you cannot contain your excitement and you need to use it now, you or your developer can use a polyfill (https://github.com/borismus/srcset-polyfill) to fill in the gap and start using srcset now.
+The picture Element
+Another proposed solution for responsive images is a new element that will be used in concert with the img element. The goal of this element is to provide a way for images to be displayed based on device specifics and media queries.
+Listing 9.1 demonstrates how the picture element could be implemented into a site.
+
+
+
+Listing 9.1 Using the picture Element
+￼￼￼￼01
+02
+03
+04
+05
+06
+<picture>
+<source srcset="small.jpg">
+<source media="(min-width: 480px)" srcset="mid.jpg 1x, mid@2x.jpg 2x"> <source media="(min-width: 768px)" srcset="large.jpg">
+<img src="default.jpg" alt="The image">
+</picture>
+
+
+The way the picture element works is really quite fascinating. The element acts as a wrapper that uses source elements as well as an img element. Use of the img element helps browsers that do not currently support the picture element render an image.
+The source element is used for setting up parameters that define what image should be rendered. On line 2, the srcset attribute is used to define an image that will be displayed on screens that measure from 0px and up. It does not cover all screen sizes because of the source elements that are defined on lines 3 and 4.
+
+
+On line 3, you can see that a media attribute has been used to define the image that devices with a minimum screen size of 480px will render. It also contains the srcset attribute that defines a high-pixel-density image if the device supports it.
+Looking ahead to line 4, you can see that the media attribute has been used again to define what image devices with a minimum screen resolution of 768px will see.
+To break this down, the images will display as follows:
+■ Devices with a screen width of 0–479px will load small.jpg.
+■ Devices with a screen width of 480–767px will load either mid.jpg or mid@2x.jpg, depending on pixel density.
+■ Devices with a minimum width of 768px will load large.jpg.
+■ Browsers that do not support the picture element will load default.jpg.
+
+It might also be somewhat surprising to see the srcset attribute inside the source element or even find it supported. It is actually encouraged to help deliver the proper image to the browser.
+There is more to using the picture element than just specifying which images to use and using media queries to decide. You can also do some limited feature support testing with it to deliver images based on the browser supporting the image format.
+You might be thinking that if a browser is “modern” enough to support the picture element, then it surely must have support for all picture formats. I can easily see why you might have gone down that path in your thinking, but you need to remember that not all browsers support the WEBP image format yet (for a current list, visit http://caniuse.com/webp).
+Using the type attribute, you can specify whether an image should be displayed based on browser support. Listing 9.2 shows how this is possible.
+
+
+
+Listing 9.2 Specifying Different Animated Image Formats
+IMAGES SHOULD BE RESPONSIVE 123
+￼￼￼￼01 02 03 04 05
+<picture>
+<source type="image/webp" srcset="funny.webp"> <source type="video/png" srcset="funny.apng"> <img src="funny.gif" alt="absolute madness" />
+</picture>
+
+
+Looking closely at Listing 9.2, you can see that the type attribute is used on lines 2 and 3. On line 2, it contains a value of image/webp, and line 3 contains a value of video/png. Unless you are the type of designer who regularly tweaks your web server, these values might appear to be utter nonsense. These values are known as a MIME type.
+The server and browser use the MIME type to communicate and describe the file that is being transferred and rendered. The image/webp value explains that the file is an image of the WEBP variety. The browser already has a list of known MIME types and decides whether it should
+use that file. The value of video/png might appear wrong, but that is the valid MIME type for animated PNG files.
+Chrome supports the WEBP image format (including animated WEBP files), but Firefox does not. Firefox does support animated PNG files, however, and other browsers support animated
+GIF files.
+By using the picture element to specify which image to use, you can optimize the experience for mobile and desktop users.
+At the time of this writing, the picture element is not currently supported in any browser. However, there is a project underway for both Firefox and Chrome browsers to have support implemented hopefully before the end of 2014.
+To learn more about the picture element, including how to load multiple images for multiple sizes in a more streamlined fashion, visit http://picture.responsiveimages.org/.
+Using a JavaScript Solution
+Designers and developers who are unable to work with modern browsers, or who do not have the time for the rest of the world to catch up with technology, will be using a JavaScript solution as part of their progressive enhancement suite.
+Picturefill, from Scott Jehl, has seen excellent success. I have also created and used my own solution, called Pixity, on several projects.
+Picturefill
+The problem with the picture element is that, if you want to use it now, you can’t. Even with browsers adding support for it in the near future, you are bound to users actually using that particular browser and having it work on their mobile devices.
+This is the problem Scott Jehl saw, so he decided to implement a JavaScript solution that is based on the picture element but uses span elements to allow it to work safely cross-browser.
+
+
+Note that Picturefill works best with browsers that support CSS3 media queries. With most smartphones, this should not pose a problem because almost all support CSS3 today.
+Listing 9.3 shows the HTML markup needed to use Picturefill in your project.
+
+
+Listing 9.3 Specifying Different Animated Image Formats
+01 <span data-picture data-alt="description of image">
+02 <span data-src="small.jpg"></span>
+03 <span data-src="medium.jpg" data-media="(min-width: 480px)"></span>
+04 <span data-src="large.jpg" data-media="(min-width: 768px)"></span>
+05 <span data-src="extralarge.jpg" data-media="(min-width: 1140px)"></span>
+06
+07 <noscript>
+08 <img src="small.jpg" alt="description of image">
+09 </noscript>
+10 </span>
+
+
+Lines 2–5 show the initial setup required to make Picturefill work on browsers that support JavaScript, and lines 7–9 show the image that will be shown on devices that do not support JavaScript.
+Line 1 uses data attributes of data-picture and data-alt Picturefill uses to determine where the image will be placed and what text will be used as the image’s alternate message for screen readers and similar devices.
+The other lines contain at least a data attribute of data-src. Others have an accompanying data-media that specifies the image that should be used and the requirements for displaying that particular image.
+If you review both the srcset and picture element sections, this should start looking very similar in execution. You might be wondering about high-pixel-density screens and how
+they fit into the equation. They are added by changing the media query in the data-media attribute. Let’s copy and modify a line so that it will serve a high-density image. Note that I have broken the line out to make it easier to read:
+<span
+data-src="medium@2x.jpg"
+data-media="(min-width: 480px) and (min-device-pixel-ratio: 2.0)">
+</span>
+This could now be added as line 4, and support for high-pixel-density devices would be added for devices between 480px and 767px wide.
+To download Picturefill and read the full usage guide, visit https://github.com/scottjehl/ picturefill.
+
+Pixity
+Before I saw Picturefill, I was working on a redesign of an eCommerce site that now has more than 40% mobile users.
+Knowing that the site is somewhere between 60% and 70% images, I needed a solution that gave me the flexibility of serving different files to different screen sizes but also allowed the content manager an easy way to specify images without having development constantly hard- coding the images into the dynamic files.
+The solution was to create a plugin called Pixity. The first use of the plugin was actually to specify when to use high-pixel-density images; that is where the name originated, the PIXel densITY.
+Pixity currently is released as a jQuery (1.7+) plugin and is fairly easy to implement. By adding a few data attributes to an img element and giving the image a specific class, the Pixity plugin runs on page load and replaces a small 1x1 pixel image with the appropriate image for the device.
+Listing 9.4 demonstrates the HTML markup of an image using Pixity.
+
+
+Listing 9.4 Using Pixity to Display an Image
+<img class="pixity" src="images/placeholder.gif" alt="image description" data-path="images/" data-sm="small.jpg" data-md="medium.jpg" data-lg="large.jpg" data-xl="xlarge.jpg" />
+
+
+Unlike Picturefill and srcset, you do not specify the minimum device widths for your images. Instead, they are predefined.
+By default, the sizes for the images used are as follows:
+■ data-sm: 0–480px
+■ data-md: 481–767px
+■ data-lg: 768–959px
+■ data-xl: 960px+
+You can change the defaults by modifying the jQuery call like so:
+$.pixity({limitSm:600,limitMd:960,limitLg,1280});
+
+Note the data-path attribute. This attribute might seem a bit out of place, but it is quite use- ful with a CMS system with a limited amount of characters. If you are using a CDN with a long directory path, instead of putting it in for every image, you put it in once and then fine-tune it with the other data attributes.
+Tip
+When using Pixity, you should use an intrinsic ratio if at all possible. Because of the use of a small placeholder image, failing to use an intrinsic ratio will cause the page to reflow on the user.
+If you are interested in modifying and editing JavaScript, you can modify and extend Pixity to fit your needs. I have several versions that have not been uploaded to GitHub that I use to work with loading dynamic and responsive content into sliders, and one version allows the client to download the high-pixel-density version of a file only if the client passes a speed test.
+Pixity Core is currently licensed as MIT (http://opensource.org/licenses/MIT) and is available for download and modification at https://github.com/dutsonpa/pixity.
+
+
+
+
+Summary
+In this chapter, you learned that displaying images takes planning and care. By taking the time to fine-tune the images that will be displayed to users, you increase the chance of them using and returning to your site.
+You learned that you can take advantage of art direction to change the visual message you are sharing. You can do this with some new features, such as the srcset attribute, or by taking advantage of JavaScript plugins such as Picturefill and Pixity.
+
