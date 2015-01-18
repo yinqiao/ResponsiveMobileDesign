@@ -1,33 +1,64 @@
-## 第9章 响应式图片
-Designs will always be epic, iconic, and awe inspiring. However, when thinking about the medium that users will be viewing your design on, it might be best to save some of that awe for the details and content delivery speed.
-Using images that work on a variety of devices can be challenging. Luckily, you can start using some techniques and solutions to take your design into the future.
+# RESPONSIVE IMAGES
+# 第9章 响应式图片
 
+Designs will always be epic, iconic, and awe inspiring. However, when thinking about the medium that users will be viewing your design on, it might be best to save some of that awe for the details and content delivery speed.Using images that work on a variety of devices can be challenging. Luckily, you can start using some techniques and solutions to take your design into the future.￼￼￼￼￼￼
 
+设计创作总是史诗般、生动形象、富于灵感的。然而，一旦考虑到用户查看你的创作所使用的设备，
+为了细节和内容的呈现速度最好还是少一些敬畏感。
 
-Images Should Be Responsive
+在各式各样的设备商使用图片是很有挑战性的。幸运的是，你可以开始使用一些技术和解决方案来为未来设计。
+
+## Images Should Be Responsive
+## 图片应该是响应式的
+
 It used to be that the most difficult part of exporting an image was deciding whether it worked better as a JPEG or GIF file. Those were simple days when it usually came down to determining the number of colors used and deciding whether transparency was important to me.
+
+过去，导出图片最难的问题是决定使用JPEG格式还是GIF格式更好。不过，通常确定了图片使用的颜色数量、确定了图片透明度的重要性之后，这些问题都已经简单了。
+
 Then came PNG files, the solution that delivered the grandeur and scope of JPEG files and also gave images crisp and pristine transparency. It was definitely a step up, and many designers and developers still rely heavily on using PNG files. However, the file size for large images still leaves something to be desired. PNG files offer the same number of colors as JPEG files, but the file size ends up being far greater than with JPEG files because of the lossless compression that PNG uses in many image-manipulation programs. You might be able to save space by switching to a lossy PNG file, but JPEG files will almost always be smaller when used on complex, high- color images. As designers and developers, we are now dealing with incorporating SVG files and WEBP files.
+
+然后是PNG文件，解决方案是确定JPEG文件的阈值范围，同时设置好图像清晰度和原始透明度。这无疑是艰难的一步，并且许多设计师和开发者仍然严重依赖PNG文件。然而，对于大型图像的文件大小仍然令人不满意。当PNG文件采用与JPEG文件相同的一些颜色值时，其文件大小比JPEG文件大非常多，原因是PNG在许多图像处理程序中使用无损压缩。你可以通过开启PNG的有损模式以节省空间，但是当使用更为复杂的、真彩色图像时，JPEG文件仍然比有损压缩的PNG文件小很多。作为设计师和开发人员，我们正在解决将SVG文件和WEBP文件合并的问题。
+
 All of these image formats are fantastic in their own respects, but the problem is dealing with them when they are too big or too small for the screen requesting them.
+
+从这些图片格式自身的角度来看，它们都是极为出色的，但是问题是对于展示图片的屏幕来说，这些图片太大或太小了。
+
 To give you an understanding of why images need to be responsive, in this chapter, you learn about delivering images to the browser by means of scaling, using new image elements, and using JavaScript to serve the correct image.
-Delivering Images
-When you are dealing with mobile devices, the images that you choose to use are extremely important. Detail, clarity, and even the emotion you are attempting to evoke can be dramati- cally shifted when your image is squished or broken on the page.
+
+为什么图片要做响应式？本章你将学会通过缩放、使用新的图像元素、使用JavaScript等方法在浏览器端展示合适的图片。
+
+## 图片分发
+
+When you are dealing with mobile devices, the images that you choose to use are extremely important. Detail, clarity, and even the emotion you are attempting to evoke can be dramatically shifted when your image is squished or broken on the page.
+
+当你正在处理移动设备，你所采用的图片非常重要。当你使用的图片在页面上显示为变形或被截断，细节、清晰、甚至你想表达的情感会被毫无疑问地曲解了。
+
 To give you a feel for what I am talking about, see Figure 9.1.
 In Figure 9.1, you can easily see both the climber in the middle and the crowd below. If you viewed this same image on a phone, the scene either would be zoomed in or would have to scale to fit, as in Figure 9.2.
-The image has been scaled so that everything is still visible, but this leaves less initial detail, especially on the climber, and might actually cause more visual confusion than would a differ- ent image.
+The image has been scaled so that everything is still visible, but this leaves less initial detail, especially on the climber, and might actually cause more visual confusion than would a different image.
 
+为了更为明确我想说什么，请看吐9.1。在图9.1中，你可以很容易地看到中间的登山者和下面的人群。如图9.2所示，如果在手机上看同一张图片，屏幕会被放大或缩小以适配图片的大小。图片被缩小了以便保证所有的图片内容是可见的，但是这使得原始图片细节、尤其是登山者，事实上也有可能产生了更多视觉混乱误以为是另一张图片。
 
 Figure 9.1 The image is viewed on a desktop with everything in good detail.
 
+图9.1 在台式机上展示的图片所有细节完好
+
 Figure 9.2 When viewed on a phone, the scene is scaled to fit, making the subject more difficult to view.
+
+图9.2 图片在手机上展示，屏幕被缩放以适配图片，使得主题无法辨识
 
 Leaving the visuals aside, what does this do for users who are attempting to download the images? Well, for starters, it slows them down. The original image used for Figures 9.1 and 9.2 is a JPG that comes out at 344KB. That certainly doesn’t sound like much, but when your site has 10 images of a similar size, you would be adding more than 3MB in images alone to what users have to download on their mobile devices, along with any JavaScript files and other data to view your site.
 
 
+
 Note
+
 3MB of data doesn’t sound very large when you have a fast broadband connection. However, that same 3MB of data can take up some time (as well as data) on wire- less plans. The following lists the time to download a 3MB image:
+
 ■ 3G (1–4Mbps): 5–23 seconds
 ■ LTE (5–10Mbps): 2–4 seconds
 ■ DSL (1.5Mbps): 15 seconds
+
 Note that, even after downloading the image, the device still has to process and display the image. If you have multiple images, the time taken to load images will add up quickly.
 
 
