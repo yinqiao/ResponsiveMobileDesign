@@ -17,7 +17,7 @@ It used to be that the most difficult part of exporting an image was deciding wh
 
 Then came PNG files, the solution that delivered the grandeur and scope of JPEG files and also gave images crisp and pristine transparency. It was definitely a step up, and many designers and developers still rely heavily on using PNG files. However, the file size for large images still leaves something to be desired. PNG files offer the same number of colors as JPEG files, but the file size ends up being far greater than with JPEG files because of the lossless compression that PNG uses in many image-manipulation programs. You might be able to save space by switching to a lossy PNG file, but JPEG files will almost always be smaller when used on complex, high- color images. As designers and developers, we are now dealing with incorporating SVG files and WEBP files.
 
-然后是PNG文件，解决方案是确定JPEG文件的阈值范围，同时设置好图像清晰度和原始透明度。这无疑是艰难的一步，并且许多设计师和开发者仍然严重依赖PNG文件。然而，对于大型图像的文件大小仍然令人不满意。当PNG文件采用与JPEG文件相同的一些颜色值时，其文件大小比JPEG文件大非常多，原因是PNG在许多图像处理程序中使用无损压缩。你可以通过开启PNG的有损模式以节省空间，但是当使用更为复杂的、真彩色图像时，JPEG文件仍然比有损压缩的PNG文件小很多。作为设计师和开发人员，我们正在解决将SVG文件和WEBP文件合并的问题。
+然后是PNG文件，解决方案是确定壮丽辉煌JPEG文件，同时设置好图像清晰度和原始透明度。这无疑是艰难的一步，并且许多设计师和开发者仍然严重依赖PNG文件。然而，对于大型图像的文件大小仍然令人不满意。当PNG文件采用与JPEG文件相同的一些颜色值时，其文件大小比JPEG文件大非常多，原因是PNG在许多图像处理程序中使用无损压缩。你可以通过开启PNG的有损模式以节省空间，但是当使用更为复杂的、真彩色图像时，JPEG文件仍然比有损压缩的PNG文件小很多。作为设计师和开发人员，我们正在解决将SVG文件和WEBP文件合并的问题。
 
 All of these image formats are fantastic in their own respects, but the problem is dealing with them when they are too big or too small for the screen requesting them.
 
@@ -49,11 +49,11 @@ Figure 9.2 When viewed on a phone, the scene is scaled to fit, making the subjec
 
 Leaving the visuals aside, what does this do for users who are attempting to download the images? Well, for starters, it slows them down. The original image used for Figures 9.1 and 9.2 is a JPG that comes out at 344KB. That certainly doesn’t sound like much, but when your site has 10 images of a similar size, you would be adding more than 3MB in images alone to what users have to download on their mobile devices, along with any JavaScript files and other data to view your site.
 
-
+除了视觉效果不说，在用户试图下载图片时都发生了什么呢？嗯，首先，慢了下来。图9.1和图9.2使用的原始图片是344KB的JPG文件。当然，听起来好像不多，但是，当你的网站有10张相同大小的图片，这将给用户增加了3MB的图片需要下载到他们的移动设备商，同时还需要下载JavaScript文件和你的网站上的其他数据。
 
 Note
 
-3MB of data doesn’t sound very large when you have a fast broadband connection. However, that same 3MB of data can take up some time (as well as data) on wire- less plans. The following lists the time to download a 3MB image:
+3MB of data doesn’t sound very large when you have a fast broadband connection. However, that same 3MB of data can take up some time (as well as data) on wireless plans. The following lists the time to download a 3MB image:
 
 ■ 3G (1–4Mbps): 5–23 seconds
 ■ LTE (5–10Mbps): 2–4 seconds
@@ -61,27 +61,62 @@ Note
 
 Note that, even after downloading the image, the device still has to process and display the image. If you have multiple images, the time taken to load images will add up quickly.
 
+注意：
+
+当你链接至高速带宽上时，3MB的数据量听起来不是非常大。然而，在无线网络上，下载3MB的数据需要耗费一定的时间和数据空间。以下是下载3MB大小的图片所耗费的时间：
+
+* 3G(1-4Mbps): 5-23秒
+* LTE (5–10Mbps): 2–4秒
+* DSL (1.5Mbps): 15秒
+
 
 If you were able to serve a different image based on device size, this would not only save in file size, but it would also enable you to choose the art direction of the image. Figure 9.3 shows the image optimized for mobile users.
+
+如果你能够根据设备大小提供不同的图像，不仅保存文件大小，而且让你能够选择图像的艺术导向。图9.3展示了为移动用户优化后的图片。
+
 Being able to choose exactly what is shown is helpful, and because this enables you to use a smaller image (this one is 49KB), you can be assured that the user will be able to download and view the image much faster.
 While on the subject of the file size of your images, it might be worth using the WEBP image format on your site. This format has a wide array of features and uses a different compression algorithm, enabling you to save anywhere from 7% to 50% of original picture size. Figure 9.4 shows WEBP and JPEG images.
-You have a few methods that you can employ to do what we have done here. In the next sec- tions, you learn first about image scaling, then about using the srcset attribute, and then about using the picture element.
 
+能够精确地选择展示什么图像是非常有用的，因为这让你能够选择更小的图片（这一张是49KB），你能够确保用户更加快速地下载并查看图片。说到图片的大小问题，在你的网站上值得使用WEBP格式的图片。
+
+You have a few methods that you can employ to do what we have done here. In the next sections, you learn first about image scaling, then about using the srcset attribute, and then about using the picture element.
+
+实现我们这里所做的，你可以采用几种方法。下一节中，你将首先学习图片缩放，其次学习使用srcset属性，最后学习使用图片元素。
 
 Figure 9.3 The visible portion of the image has changed for an optimal viewing experience on a mobile device.
 
 Figure 9.4 Using WEBP, the top image is 56KB; the JPG image on the bottom is 111KB.
 
+图9.3 为了实现在移动设备的最佳体验，图片的可视部分发生了变化。
 
-Image Scaling
+图9.4 上面一张图片使用WEBP格式，其大小是56KB；而下面一张采用的是JPG格式，其大小是111KB。
+
+## Image Scaling
+
+## 图片缩放
+
 One of the most common—and also most misunderstood—“responsive” image techniques is the use of image scaling via the browser. This doesn’t involve any new images; it just requires a few lines of CSS. Applying the following in your CSS magically makes your images shrink to fit:
+
 img {
 max-width: 100%; height: auto;
 }
-Note that IE8 users will notice a spectacular amount of fail with this example; to fix it, you shouldapplywidth: 100%beforemax-width: 100%.Youshouldalsobeawarethat,by setting an image to have a width of 100%, the image might attempt to take up as much space as possible. This means potential stretching. To avoid this, be sure to put the image inside a container such as a <div> element that has a width already set.
+
+一种最常见——也是最容易误解——“响应式”图片技术是通过浏览器缩放。这不需要任何新图片，仅仅需要几行CSS代码。在你的CSS中添加如下代码，将魔术般地使得你的图片进行缩放适配：
+
+		
+		
+	img {
+		max-width: 100%; height: auto;
+	}
+
+
+Note that IE8 users will notice a spectacular amount of fail with this example; to fix it, you should apply width: 100% before max-width: 100%.You should also be aware that, by setting an image to have a width of 100%, the image might attempt to take up as much space as possible. This means potential stretching. To avoid this, be sure to put the image inside a container such as a <div> element that has a width already set.
+
+需要注意的是，使用本例在IE8浏览器中会发现惊人的失败。为了修复IE8，你必须在max-width: 100%之前使用width: 100%。你还需注意的是，通过设置图片的宽度为100%，图片将试图尽可能占用更大的空间。这意味着潜在的拉伸效果。为了避免这种情况，请确保图片元素在如<div>这类自身带有宽度的元素中。
+
 This will make all your images fit the screen they are viewed on, but it does nothing for file size. On top of the included file size, using large images and forcing the browser to scale can be CPU and memory intensive. That might not matter too much with your desktop or laptop computer, but it quickly becomes a very real problem when looking at rendering speed and power con- sumption on a mobile device.
 
-
+这将
 
 Tip
 If you are currently using image maps on your site, you will need to come up with a new solution. Because of the pixel-perfect mapping of image maps, images that are resized will no longer have targets in the places you expect. You can work around this by positioning invisible hot spots on the image by using a percentage for layout, but this is far from a bulletproof solution.
