@@ -114,26 +114,45 @@ Note that IE8 users will notice a spectacular amount of fail with this example; 
 
 需要注意的是，使用本例在IE8浏览器中会发现惊人的失败。为了修复IE8，你必须在max-width: 100%之前使用width: 100%。你还需注意的是，通过设置图片的宽度为100%，图片将试图尽可能占用更大的空间。这意味着潜在的拉伸效果。为了避免这种情况，请确保图片元素在如<div>这类自身带有宽度的元素中。
 
-This will make all your images fit the screen they are viewed on, but it does nothing for file size. On top of the included file size, using large images and forcing the browser to scale can be CPU and memory intensive. That might not matter too much with your desktop or laptop computer, but it quickly becomes a very real problem when looking at rendering speed and power con- sumption on a mobile device.
+This will make all your images fit the screen they are viewed on, but it does nothing for file size. On top of the included file size, using large images and forcing the browser to scale can be CPU and memory intensive. That might not matter too much with your desktop or laptop computer, but it quickly becomes a very real problem when looking at rendering speed and power consumption on a mobile device.
 
-这将
+这将使得你的图片适配所视屏幕，但是图片的大小并未发生变化。另外，使用大图并让强制使得浏览器进行缩放，可以提交CPU和内容的使用率。在台式机或笔记本电脑商可能看不出有多大的影响，但是当在移动设备上查看图片的渲染速度和耗电量将很成问题。
 
 Tip
+
 If you are currently using image maps on your site, you will need to come up with a new solution. Because of the pixel-perfect mapping of image maps, images that are resized will no longer have targets in the places you expect. You can work around this by positioning invisible hot spots on the image by using a percentage for layout, but this is far from a bulletproof solution.
 
+小贴士：
+
+如果你的网站正在使用图片映射，那么你需要想出一个新的解决方案。因为，图像映射是像素级的映射关系，一旦图片尺寸发生变化，那些映射将无法定位到你所预期的位置。当然，你可以通过百分比布局放置不可见热区来解决，但这远不是一个完美的解决方案。
 
 I do not advocate the use of browser-resized images by giving the browser a large image and forcing it to handle scaling the displayed size as a standard practice in your design; however, it can be a last-minute solution to get you by until you can get the correct images or solution in place.
-Using Intrinsic Ratio
+
+我并不提倡将这种方法作为你的设计的标准的实践：通过提供一张大图给浏览器，让浏览器来改变这张图片的尺寸和处理缩放展示尺寸。不过，这可以是一个最后的解决方案，直到你找到正确的图像或解决方案。
+
+### Using Intrinsic Ratio
+
+### 使用固定比例
+
 Maybe this has happened to you: You’re browsing the web and start to load a page, but as you begin reading, the content is suddenly moved or shoved in a new direction as images are loaded. This is called page reflow and is caused by images being loaded in a place that did not already adjust the layout to handle them. Figure 9.5 shows a page before and after images are loaded, to illustrate this effect.
 
+或许你也曾遇到过这种场景：你正在浏览网页并开始加载页面，但是当你开始阅读时，当图片下载完成后网页的内容突然被移动或推挤到一边。这就是网页重绘，这种情况是由于在某处并未调整布局处理下载完成的图片而引起的一种重绘。图9.5展示了一张网页在图片下载完成前后的效果。
 
 Figure 9.5 Before images are loaded, text content is allowed to bunch up (left). After the image has loaded, the text moves below the image (right).
 
+图9.5 左图展示的是在图片下载完成前，文本内容可以聚集在一处。右图展示的是当图片下载完成后，文本内容被推移到图片下方。
 
 You might be thinking, “Well, of course the text moved! I can’t define how the space of an image changes on every screen!” That’s true, you definitely cannot. However, if you know the ratio of that image, you can use a little trick to determine how much space the image will take up in this particular layout.
-Thierry Koblentz first talked about the intrinsic ratio on A List Apart in 2009 (http://alistapart. com/article/creating-intrinsic-ratios-for-video/). In the article, Thierry talks about using the intrinsic ratio for handling videos on websites. It also happens to work quite well for images that need to use a placeholder to stop page reflow.
+
+你或许会想，“文字当然会被移动！我无法定义所有屏幕上图片的尺寸！”是的，你确实不能。不过，如果你知道图片的比例，就可以使用一点小技巧来确定在这种特殊布局中该图片所需占用的空间大小。
+
+Thierry Koblentz first talked about the intrinsic ratio on A List Apart in 2009 (http://alistapart.com/article/creating-intrinsic-ratios-for-video/). In the article, Thierry talks about using the intrinsic ratio for handling videos on websites. It also happens to work quite well for images that need to use a placeholder to stop page reflow.
+
+Thierry Koblentz 早在2009年在A List Apart网站(http://alistapart.com/article/creating-intrinsic-ratios-for-video/)上发表文章提出了这种技巧。在这篇文字中，Thierry讨论了在网站上使用这种技巧来处理视频。在需要提供一个占位来组织页面重绘的情况下，使用这种技巧效果也非常好。
+
 To see this in action, Figure 9.6 shows the same page, but with a plan for the page reflow by including space for the image by using the intrinsic ratio of the image. This is noticeable in com- parison to Figure 9.5 because the text “This text should appear below...” is not visible on the screen when the page initially loads; instead, you only see the “An image should appear below” as the page has now saved space to insert the image.
 
+举一个例子来说明：图9.6展示了同一张网页，
 
 Figure 9.6 Space has been reserved (left) for the image to load into (right).
 
