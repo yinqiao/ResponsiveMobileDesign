@@ -136,7 +136,7 @@ I do not advocate the use of browser-resized images by giving the browser a larg
 
 Maybe this has happened to you: You’re browsing the web and start to load a page, but as you begin reading, the content is suddenly moved or shoved in a new direction as images are loaded. This is called page reflow and is caused by images being loaded in a place that did not already adjust the layout to handle them. Figure 9.5 shows a page before and after images are loaded, to illustrate this effect.
 
-或许你也曾遇到过这种场景：你正在浏览网页并开始加载页面，但是当你开始阅读时，当图片下载完成后网页的内容突然被移动或推挤到一边。这就是网页重绘，这种情况是由于在某处并未调整布局处理下载完成的图片而引起的一种重绘。图9.5展示了一张网页在图片下载完成前后的效果。
+或许你也曾遇到过这种场景：你正在浏览网页并开始加载页面，但是当你开始阅读时，当图片下载完成后网页的内容突然被移动或推挤到一边。这就是网页重新渲染，这是由于在某处并未调整布局处理下载完成的图片而引起的一种重新渲染的情况。图9.5展示了一张网页在图片下载完成前后的效果。
 
 Figure 9.5 Before images are loaded, text content is allowed to bunch up (left). After the image has loaded, the text moves below the image (right).
 
@@ -148,45 +148,100 @@ You might be thinking, “Well, of course the text moved! I can’t define how t
 
 Thierry Koblentz first talked about the intrinsic ratio on A List Apart in 2009 (http://alistapart.com/article/creating-intrinsic-ratios-for-video/). In the article, Thierry talks about using the intrinsic ratio for handling videos on websites. It also happens to work quite well for images that need to use a placeholder to stop page reflow.
 
-Thierry Koblentz 早在2009年在A List Apart网站(http://alistapart.com/article/creating-intrinsic-ratios-for-video/)上发表文章提出了这种技巧。在这篇文字中，Thierry讨论了在网站上使用这种技巧来处理视频。在需要提供一个占位来组织页面重绘的情况下，使用这种技巧效果也非常好。
+Thierry Koblentz 早在2009年在A List Apart网站(http://alistapart.com/article/creating-intrinsic-ratios-for-video/)上发表文章提出了这种技巧。在这篇文字中，Thierry讨论了在网站上使用这种技巧来处理视频。在需要提供一个占位来组织页面重新渲染的情况下，使用这种技巧效果也非常好。
 
-To see this in action, Figure 9.6 shows the same page, but with a plan for the page reflow by including space for the image by using the intrinsic ratio of the image. This is noticeable in com- parison to Figure 9.5 because the text “This text should appear below...” is not visible on the screen when the page initially loads; instead, you only see the “An image should appear below” as the page has now saved space to insert the image.
+To see this in action, Figure 9.6 shows the same page, but with a plan for the page reflow by including space for the image by using the intrinsic ratio of the image. This is noticeable in comparison to Figure 9.5 because the text “This text should appear below...” is not visible on the screen when the page initially loads; instead, you only see the “An image should appear below” as the page has now saved space to insert the image.
 
-举一个例子来说明：图9.6展示了同一张网页，
+举一个例子来说明：图9.6展示了同一张网页，但是，考虑到页面重新渲染，通过图片比例的技巧包含一个放置图片的空间。
+这是与图9.5相比明显地不同，因为下面的文本“这文本应该出现……”是最初当页面加载前在屏幕上不可见的；相反，由于现在已经保留了应该插入图像的空间，你只看到“一个图像应该出现于下方”的字样呈现在页面上。
 
 Figure 9.6 Space has been reserved (left) for the image to load into (right).
 
+图9.6 左图中为加载图片预留空间，图片加载后如右图所示
 
 To figure out the intrinsic ratio, you need to know the aspect ratio of your image, divide the second number by the first, and use the result as padding on a container element.
+
+为了使用固定比例，你需要知道图片的纵横比，使用高度除以宽度，得到的值作为容器的padding值。
+
 For example, if you have a 480x320px image, the aspect ratio is 3:2. Taking that ratio, you get the value of 2/3, or 66.67. With this number, you can now set up a container element that will be used as a placeholder for the image. The CSS looks like this:
-.wrapper {
-position: relative; padding-bottom: 66.67%; height: 0;
-}
-.image {
-position: absolute; top: 0;
-left: 0;
-width: 100%; height: 100%;
-}
 
 
+    .wrapper {
+    	position: relative; padding-bottom: 66.67%; height: 0;
+    }
+    .image {
+    	position: absolute; top: 0;
+    	left: 0;
+   		width: 100%; height: 100%;
+    }
+
+例如，如果你有一张480x320px的图片，宽高比是3:2。纵横比是2/3，约等于66.67%。这样就可以设置为图片预留空间的容器进行设置了。CSS代码如下：
+
+    .wrapper {
+    	position: relative; padding-bottom: 66.67%; height: 0;
+    }
+    .image {
+    	position: absolute; top: 0;
+    	left: 0;
+   		width: 100%; height: 100%;
+    }
+    
 When using intrinsic ratios, you need to create multiple classes for each aspect ratio you use with your images. This way, you can have differently sized images and still have placeholders for them.
-The srcset Attribute
+
+使用纵横比，你需要为不同比例的图片写许多class，这样就可以为不同大小的图片在页面上进行预留位置了。
+
+### The srcset Attribute
+
+### srcset属性
+
 If you have rather sanely decided that scaling images is not something you’d like to pursue, you might be interested in using the srcset attribute.
+
+如果你认为非常不喜欢图片缩放的技术，那么你也许会对srcset属性感兴趣。
+
 This attribute is used with the img element and is quite elegant in the execution of choosing the correct image to display.
+
+srcset是img元素的属性，在处理选择正确的图片来展示是非常优雅的。
+
 Look at the following snippet:
+
 <img src="meh.jpg" alt="an image" />
+
+请看如下代码：
+
+<img src="meh.jpg" alt="an image" />
+
 Yes, that is the ordinary way to add an image to your site. It has an src attribute that specifies which file to use (in this case, the aptly named meh.jpg), and the alt attribute enables you to add text that will appear if the image is unavailable, for text readers, and for similar uses.
+
+这是在网站上添加图片的常规方法。使用src属性来引用对应的图片文件（本例中即meh.jpg），alt属性用于展示当图片不可用时为文本的读者和类似用途展示的默认文案。
+
 The following snippet has had the srcset attribute added:
+
 <img src="standard.jpg" alt="an image"
 srcset="small_480.jpg 480w, standard_768.jpg 768w,
 large_1024.jpg 1024w, large@2x.jpg 2x" />
+
+如下代码片段添加了srcset属性：
+
+
+	<img src="standard.jpg" 
+		alt="an image"
+		srcset="small_480.jpg 480w, 
+		standard_768.jpg 768w,
+		large_1024.jpg 1024w, 
+		large@2x.jpg 2x" />
+
+
 Tip
-Use a naming convention with your images. The previous snippet of srcset uses a bit of humor to help convey that you can use larger images with more detail as the screen gets larger, but you should not copy those naming standards. Attempt- ing to manage a large number of files with names that do not match will be tricky and, in the long run, not worth the stress. Using names such as hero_480.jpg and hero_480@2x.jpg is a much better system.
+
+Use a naming convention with your images. The previous snippet of srcset uses a bit of humor to help convey that you can use larger images with more detail as the screen gets larger, but you should not copy those naming standards. Attempting to manage a large number of files with names that do not match will be tricky and, in the long run, not worth the stress. Using names such as hero_480.jpg and hero_480@2x.jpg is a much better system.
+
+小贴士：
+
+为图片使用命名规范。上面一段代码片段的srcset属性使用了一点幽默的命名法，用以说明当屏幕增大时你可以使用细节更丰富的大图，但是，请勿复制改段代码的命名标准。维护大量命名不标准的图片是非常棘手的，并且在长远看来是不值得的。采用类似hero_480.jpg、hero_480@2x.jpg这类的名称更加可取。
+
 You can see from the previous example snippet that the srcset attribute takes a list of comma-separated values. They might seem a little out of sorts at first, but at second glance, you should notice that there is a value ending with w after almost every image filename. That value tells the browser the size or limit of showing that image.
 
-
-
-
+你可以从上面的代码段看出srcset属性使用一些列逗号分隔的属性值。起初看起来有一点冗长感，但是，仔细看会发现几乎每个图片文件名都以字母w结尾。这个属性值告诉浏览器图片的大小或限制。
 
 That breaks down into the following:
 ■ 0–480px screens will show small_480.jpg.
@@ -194,35 +249,61 @@ That breaks down into the following:
 ■ 769–1024px screens will show large_1024.jpg.
 ■ High-pixel-density screens will show large@2x.jpg.
 ■ All other screens will use standard.jpg.
+
+可将该属性值分解如下：
+
+* 屏幕尺寸为 0–480px 之间的显示图片small_480.jpg。
+* 屏幕尺寸为 481–768px 之间的显示图片 standard_768.jpg。
+* 屏幕尺寸为 769–1024px 之间的显示图片 large_1024.jpg。
+* 高像素密度屏幕显示图片large@2x.jpg。
+* 其他屏幕使用图片standard.jpg。
+
 This is a fantastic solution, but use it with careful planning to make sure that you are serving optimized images to the correct devices. Having a fallback image is nice, but it could leave you with an image that is either too small or too large to fit the device that triggered the fallback.
+
+这种解决方案非常不可思议，但是使用时请仔细确保为正确的设备提供优化后的图片。拥有可靠的图片是非常棒的，但是可靠的图片需要太小或太大的图片来对设备进行适配。
+
 You might also want to be careful when using the element because it has been implemented only in WebKit-based browsers and Chrome 34+.
+
+使用srcset属性也需注意的是：目前只有基于WebKit的浏览器和Chrome 34+浏览器支持该属性。
+
 With a little luck, other browsers will start supporting the attribute soon. If you find that you cannot contain your excitement and you need to use it now, you or your developer can use a polyfill (https://github.com/borismus/srcset-polyfill) to fill in the gap and start using srcset now.
-The picture Element
+
+有一点点幸运的是，其他浏览器很快也会开始进行支持srcset属性。如果你发现难以抑制的兴奋现在就想使用该属性，你和你的开发者们可以通过polyfill（https://github.com/borismus/srcset-polyfill）来使用srcset属性，并完成兼容问题。
+
+## The picture Element
+
+## picture 元素
+
 Another proposed solution for responsive images is a new element that will be used in concert with the img element. The goal of this element is to provide a way for images to be displayed based on device specifics and media queries.
+
+另外一种建议的响应式图片的解决方案是一个新的元素，该元素的使用与 img 元素的使用是一致的。该元素的目标是提供一种为指定的设备和基于媒体查询的设备上展示图片的方法。
+
 Listing 9.1 demonstrates how the picture element could be implemented into a site.
 
+代码清单9.1展示了如何在网站上实现 picture 元素。
+
+代码清单 9.1 使用 picture 元素
+
+----
 
 
-Listing 9.1 Using the picture Element
-￼￼￼￼01
-02
-03
-04
-05
-06
-<picture>
-<source srcset="small.jpg">
-<source media="(min-width: 480px)" srcset="mid.jpg 1x, mid@2x.jpg 2x"> <source media="(min-width: 768px)" srcset="large.jpg">
-<img src="default.jpg" alt="The image">
-</picture>
+	<picture>
+	<source srcset="small.jpg">
+	<source media="(min-width: 480px)" srcset="mid.jpg 1x, mid@2x.jpg 2x"> <source media="(min-width: 768px)" srcset="large.jpg">
+	<img src="default.jpg" alt="The image">
+	</picture>
 
+----
 
 The way the picture element works is really quite fascinating. The element acts as a wrapper that uses source elements as well as an img element. Use of the img element helps browsers that do not currently support the picture element render an image.
+
 The source element is used for setting up parameters that define what image should be rendered. On line 2, the srcset attribute is used to define an image that will be displayed on screens that measure from 0px and up. It does not cover all screen sizes because of the source elements that are defined on lines 3 and 4.
 
 
 On line 3, you can see that a media attribute has been used to define the image that devices with a minimum screen size of 480px will render. It also contains the srcset attribute that defines a high-pixel-density image if the device supports it.
+
 Looking ahead to line 4, you can see that the media attribute has been used again to define what image devices with a minimum screen resolution of 768px will see.
+
 To break this down, the images will display as follows:
 ■ Devices with a screen width of 0–479px will load small.jpg.
 ■ Devices with a screen width of 480–767px will load either mid.jpg or mid@2x.jpg, depending on pixel density.
@@ -230,7 +311,9 @@ To break this down, the images will display as follows:
 ■ Browsers that do not support the picture element will load default.jpg.
 
 It might also be somewhat surprising to see the srcset attribute inside the source element or even find it supported. It is actually encouraged to help deliver the proper image to the browser.
+
 There is more to using the picture element than just specifying which images to use and using media queries to decide. You can also do some limited feature support testing with it to deliver images based on the browser supporting the image format.
+
 You might be thinking that if a browser is “modern” enough to support the picture element, then it surely must have support for all picture formats. I can easily see why you might have gone down that path in your thinking, but you need to remember that not all browsers support the WEBP image format yet (for a current list, visit http://caniuse.com/webp).
 Using the type attribute, you can specify whether an image should be displayed based on browser support. Listing 9.2 shows how this is possible.
 
@@ -319,7 +402,13 @@ Pixity Core is currently licensed as MIT (http://opensource.org/licenses/MIT) an
 
 
 
-Summary
+## Summary
+## 总结
+
 In this chapter, you learned that displaying images takes planning and care. By taking the time to fine-tune the images that will be displayed to users, you increase the chance of them using and returning to your site.
+
 You learned that you can take advantage of art direction to change the visual message you are sharing. You can do this with some new features, such as the srcset attribute, or by taking advantage of JavaScript plugins such as Picturefill and Pixity.
 
+在本章中你学会了有计划和方法地展示图片。花一点时间对需要呈现给用户的图片进行微调，可增加网站的用户访问率和回返率。
+
+你学会了
