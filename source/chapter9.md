@@ -502,11 +502,11 @@ When using Pixity, you should use an intrinsic ratio if at all possible. Because
 
 If you are interested in modifying and editing JavaScript, you can modify and extend Pixity to fit your needs. I have several versions that have not been uploaded to GitHub that I use to work with loading dynamic and responsive content into sliders, and one version allows the client to download the high-pixel-density version of a file only if the client passes a speed test.
 
-
+如果你对修改、编辑JavaScript感兴趣，你可以根据自己的需求对Pixity进行修改和扩展。我有几个版本是用于sliders的动态加载和响应式内容的，尚未上传至GitHub，还有几个版本当且仅当客户端通过性能测试才允许客户端下载高像素密度的文件版本。
 
 Pixity Core is currently licensed as MIT (http://opensource.org/licenses/MIT) and is available for download and modification at https://github.com/dutsonpa/pixity.
 
-
+Pixity核心目前已授权为MIT(http://opensource.org/licenses/MIT)，可以通过https://github.com/dutsonpa/pixity进行下载和修改。
 
 ## Summary
 ## 总结
@@ -515,6 +515,6 @@ In this chapter, you learned that displaying images takes planning and care. By 
 
 You learned that you can take advantage of art direction to change the visual message you are sharing. You can do this with some new features, such as the srcset attribute, or by taking advantage of JavaScript plugins such as Picturefill and Pixity.
 
-在本章中你学会了有计划和方法地展示图片。花一点时间对需要呈现给用户的图片进行微调，可增加网站的用户访问率和回返率。
+在本章中你学会了有计划地展示图片的方法。花一点时间对需要呈现给用户的图片进行微调，可增加网站的用户访问率和回返率。
 
-你学会了
+你知道你可以利用艺术方向来改变共享的视觉信息。你可以通过几个新特性来实现，例如srcset属性，或者使用JavaScript插件来实现，例如Picturefill和Pixity插件。

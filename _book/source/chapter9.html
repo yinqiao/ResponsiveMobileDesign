@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="yinqiao/ResponsiveMobileDesign" data-level="1" data-basepath=".." data-revision="1421771211296">
+    <div class="book" data-github="yinqiao/ResponsiveMobileDesign" data-level="1" data-basepath=".." data-revision="1421996802706">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -301,149 +301,238 @@ max-width: 100%; height: auto;
 <h3 id="using-intrinsic-ratio">Using Intrinsic Ratio</h3>
 <h3 id="">使用固定比例</h3>
 <p>Maybe this has happened to you: You’re browsing the web and start to load a page, but as you begin reading, the content is suddenly moved or shoved in a new direction as images are loaded. This is called page reflow and is caused by images being loaded in a place that did not already adjust the layout to handle them. Figure 9.5 shows a page before and after images are loaded, to illustrate this effect.</p>
-<p>或许你也曾遇到过这种场景：你正在浏览网页并开始加载页面，但是当你开始阅读时，当图片下载完成后网页的内容突然被移动或推挤到一边。这就是网页重绘，这种情况是由于在某处并未调整布局处理下载完成的图片而引起的一种重绘。图9.5展示了一张网页在图片下载完成前后的效果。</p>
+<p>或许你也曾遇到过这种场景：你正在浏览网页并开始加载页面，但是当你开始阅读时，当图片下载完成后网页的内容突然被移动或推挤到一边。这就是网页重新渲染，这是由于在某处并未调整布局处理下载完成的图片而引起的一种重新渲染的情况。图9.5展示了一张网页在图片下载完成前后的效果。</p>
 <p>Figure 9.5 Before images are loaded, text content is allowed to bunch up (left). After the image has loaded, the text moves below the image (right).</p>
 <p>图9.5 左图展示的是在图片下载完成前，文本内容可以聚集在一处。右图展示的是当图片下载完成后，文本内容被推移到图片下方。</p>
 <p>You might be thinking, “Well, of course the text moved! I can’t define how the space of an image changes on every screen!” That’s true, you definitely cannot. However, if you know the ratio of that image, you can use a little trick to determine how much space the image will take up in this particular layout.</p>
 <p>你或许会想，“文字当然会被移动！我无法定义所有屏幕上图片的尺寸！”是的，你确实不能。不过，如果你知道图片的比例，就可以使用一点小技巧来确定在这种特殊布局中该图片所需占用的空间大小。</p>
 <p>Thierry Koblentz first talked about the intrinsic ratio on A List Apart in 2009 (<a href="http://alistapart.com/article/creating-intrinsic-ratios-for-video/" target="_blank">http://alistapart.com/article/creating-intrinsic-ratios-for-video/</a>). In the article, Thierry talks about using the intrinsic ratio for handling videos on websites. It also happens to work quite well for images that need to use a placeholder to stop page reflow.</p>
-<p>Thierry Koblentz 早在2009年在A List Apart网站(<a href="http://alistapart.com/article/creating-intrinsic-ratios-for-video/)上发表文章提出了这种技巧。在这篇文字中，Thierry讨论了在网站上使用这种技巧来处理视频。在需要提供一个占位来组织页面重绘的情况下，使用这种技巧效果也非常好。" target="_blank">http://alistapart.com/article/creating-intrinsic-ratios-for-video/)上发表文章提出了这种技巧。在这篇文字中，Thierry讨论了在网站上使用这种技巧来处理视频。在需要提供一个占位来组织页面重绘的情况下，使用这种技巧效果也非常好。</a></p>
-<p>To see this in action, Figure 9.6 shows the same page, but with a plan for the page reflow by including space for the image by using the intrinsic ratio of the image. This is noticeable in com- parison to Figure 9.5 because the text “This text should appear below...” is not visible on the screen when the page initially loads; instead, you only see the “An image should appear below” as the page has now saved space to insert the image.</p>
-<p>举一个例子来说明：图9.6展示了同一张网页，</p>
+<p>Thierry Koblentz 早在2009年在A List Apart网站(<a href="http://alistapart.com/article/creating-intrinsic-ratios-for-video/)上发表文章提出了这种技巧。在这篇文字中，Thierry讨论了在网站上使用这种技巧来处理视频。在需要提供一个占位来组织页面重新渲染的情况下，使用这种技巧效果也非常好。" target="_blank">http://alistapart.com/article/creating-intrinsic-ratios-for-video/)上发表文章提出了这种技巧。在这篇文字中，Thierry讨论了在网站上使用这种技巧来处理视频。在需要提供一个占位来组织页面重新渲染的情况下，使用这种技巧效果也非常好。</a></p>
+<p>To see this in action, Figure 9.6 shows the same page, but with a plan for the page reflow by including space for the image by using the intrinsic ratio of the image. This is noticeable in comparison to Figure 9.5 because the text “This text should appear below...” is not visible on the screen when the page initially loads; instead, you only see the “An image should appear below” as the page has now saved space to insert the image.</p>
+<p>举一个例子来说明：图9.6展示了同一张网页，但是，考虑到页面重新渲染，通过图片比例的技巧包含一个放置图片的空间。
+这是与图9.5相比明显地不同，因为下面的文本“这文本应该出现……”是最初当页面加载前在屏幕上不可见的；相反，由于现在已经保留了应该插入图像的空间，你只看到“一个图像应该出现于下方”的字样呈现在页面上。</p>
 <p>Figure 9.6 Space has been reserved (left) for the image to load into (right).</p>
-<p>To figure out the intrinsic ratio, you need to know the aspect ratio of your image, divide the second number by the first, and use the result as padding on a container element.
-For example, if you have a 480x320px image, the aspect ratio is 3:2. Taking that ratio, you get the value of 2/3, or 66.67. With this number, you can now set up a container element that will be used as a placeholder for the image. The CSS looks like this:
-.wrapper {
-position: relative; padding-bottom: 66.67%; height: 0;
+<p>图9.6 左图中为加载图片预留空间，图片加载后如右图所示</p>
+<p>To figure out the intrinsic ratio, you need to know the aspect ratio of your image, divide the second number by the first, and use the result as padding on a container element.</p>
+<p>为了使用固定比例，你需要知道图片的纵横比，使用高度除以宽度，得到的值作为容器的padding值。</p>
+<p>For example, if you have a 480x320px image, the aspect ratio is 3:2. Taking that ratio, you get the value of 2/3, or 66.67. With this number, you can now set up a container element that will be used as a placeholder for the image. The CSS looks like this:</p>
+<pre><code>.wrapper {
+    position: relative; padding-bottom: 66.67%; height: 0;
 }
 .image {
-position: absolute; top: 0;
-left: 0;
-width: 100%; height: 100%;
-}</p>
-<p>When using intrinsic ratios, you need to create multiple classes for each aspect ratio you use with your images. This way, you can have differently sized images and still have placeholders for them.
-The srcset Attribute
-If you have rather sanely decided that scaling images is not something you’d like to pursue, you might be interested in using the srcset attribute.
-This attribute is used with the img element and is quite elegant in the execution of choosing the correct image to display.
-Look at the following snippet:
-<img src="meh.jpg" alt="an image" />
-Yes, that is the ordinary way to add an image to your site. It has an src attribute that specifies which file to use (in this case, the aptly named meh.jpg), and the alt attribute enables you to add text that will appear if the image is unavailable, for text readers, and for similar uses.
-The following snippet has had the srcset attribute added:
-<img src="standard.jpg" alt="an image"
+    position: absolute; top: 0;
+    left: 0;
+       width: 100%; height: 100%;
+}
+</code></pre><p>例如，如果你有一张480x320px的图片，宽高比是3:2。纵横比是2/3，约等于66.67%。这样就可以设置为图片预留空间的容器进行设置了。CSS代码如下：</p>
+<pre><code>.wrapper {
+    position: relative; padding-bottom: 66.67%; height: 0;
+}
+.image {
+    position: absolute; top: 0;
+    left: 0;
+       width: 100%; height: 100%;
+}
+</code></pre><p>When using intrinsic ratios, you need to create multiple classes for each aspect ratio you use with your images. This way, you can have differently sized images and still have placeholders for them.</p>
+<p>使用纵横比，你需要为不同比例的图片写许多class，这样就可以为不同大小的图片在页面上进行预留位置了。</p>
+<h3 id="the-srcset-attribute">The srcset Attribute</h3>
+<h3 id="srcset">srcset属性</h3>
+<p>If you have rather sanely decided that scaling images is not something you’d like to pursue, you might be interested in using the srcset attribute.</p>
+<p>如果你认为非常不喜欢图片缩放的技术，那么你也许会对srcset属性感兴趣。</p>
+<p>This attribute is used with the img element and is quite elegant in the execution of choosing the correct image to display.</p>
+<p>srcset是img元素的属性，在处理选择正确的图片来展示是非常优雅的。</p>
+<p>Look at the following snippet:</p>
+<p><img src="meh.jpg" alt="an image" /></p>
+<p>请看如下代码：</p>
+<p><img src="meh.jpg" alt="an image" /></p>
+<p>Yes, that is the ordinary way to add an image to your site. It has an src attribute that specifies which file to use (in this case, the aptly named meh.jpg), and the alt attribute enables you to add text that will appear if the image is unavailable, for text readers, and for similar uses.</p>
+<p>这是在网站上添加图片的常规方法。使用src属性来引用对应的图片文件（本例中即meh.jpg），alt属性用于展示当图片不可用时为文本的读者和类似用途展示的默认文案。</p>
+<p>The following snippet has had the srcset attribute added:</p>
+<p><img src="standard.jpg" alt="an image"
 srcset="small_480.jpg 480w, standard_768.jpg 768w,
-large_1024.jpg 1024w, large@2x.jpg 2x" />
-Tip
-Use a naming convention with your images. The previous snippet of srcset uses a bit of humor to help convey that you can use larger images with more detail as the screen gets larger, but you should not copy those naming standards. Attempt- ing to manage a large number of files with names that do not match will be tricky and, in the long run, not worth the stress. Using names such as hero_480.jpg and hero_480@2x.jpg is a much better system.
-You can see from the previous example snippet that the srcset attribute takes a list of comma-separated values. They might seem a little out of sorts at first, but at second glance, you should notice that there is a value ending with w after almost every image filename. That value tells the browser the size or limit of showing that image.</p>
+large_1024.jpg 1024w, large@2x.jpg 2x" /></p>
+<p>如下代码片段添加了srcset属性：</p>
+<pre><code>&lt;img src=&quot;standard.jpg&quot; 
+    alt=&quot;an image&quot;
+    srcset=&quot;small_480.jpg 480w, 
+    standard_768.jpg 768w,
+    large_1024.jpg 1024w, 
+    large@2x.jpg 2x&quot; /&gt;
+</code></pre><p>Tip</p>
+<p>Use a naming convention with your images. The previous snippet of srcset uses a bit of humor to help convey that you can use larger images with more detail as the screen gets larger, but you should not copy those naming standards. Attempting to manage a large number of files with names that do not match will be tricky and, in the long run, not worth the stress. Using names such as hero_480.jpg and hero_480@2x.jpg is a much better system.</p>
+<p>小贴士：</p>
+<p>为图片使用命名规范。上面一段代码片段的srcset属性使用了一点幽默的命名法，用以说明当屏幕增大时你可以使用细节更丰富的大图，但是，请勿复制改段代码的命名标准。维护大量命名不标准的图片是非常棘手的，并且在长远看来是不值得的。采用类似hero_480.jpg、hero_480@2x.jpg这类的名称更加可取。</p>
+<p>You can see from the previous example snippet that the srcset attribute takes a list of comma-separated values. They might seem a little out of sorts at first, but at second glance, you should notice that there is a value ending with w after almost every image filename. That value tells the browser the size or limit of showing that image.</p>
+<p>你可以从上面的代码段看出srcset属性使用一些列逗号分隔的属性值。起初看起来有一点冗长感，但是，仔细看会发现几乎每个图片文件名都以字母w结尾。这个属性值告诉浏览器图片的大小或限制。</p>
 <p>That breaks down into the following:
 ■ 0–480px screens will show small_480.jpg.
 ■ 481–768px screens will show standard_768.jpg.
 ■ 769–1024px screens will show large_1024.jpg.
 ■ High-pixel-density screens will show large@2x.jpg.
-■ All other screens will use standard.jpg.
-This is a fantastic solution, but use it with careful planning to make sure that you are serving optimized images to the correct devices. Having a fallback image is nice, but it could leave you with an image that is either too small or too large to fit the device that triggered the fallback.
-You might also want to be careful when using the element because it has been implemented only in WebKit-based browsers and Chrome 34+.
-With a little luck, other browsers will start supporting the attribute soon. If you find that you cannot contain your excitement and you need to use it now, you or your developer can use a polyfill (<a href="https://github.com/borismus/srcset-polyfill" target="_blank">https://github.com/borismus/srcset-polyfill</a>) to fill in the gap and start using srcset now.
-The picture Element
-Another proposed solution for responsive images is a new element that will be used in concert with the img element. The goal of this element is to provide a way for images to be displayed based on device specifics and media queries.
-Listing 9.1 demonstrates how the picture element could be implemented into a site.</p>
-<p>Listing 9.1 Using the picture Element
-￼￼￼￼01
-02
-03
-04
-05
-06</p>
-<picture>
-<source srcset="small.jpg">
-<source media="(min-width: 480px)" srcset="mid.jpg 1x, mid@2x.jpg 2x"> <source media="(min-width: 768px)" srcset="large.jpg">
-<img src="default.jpg" alt="The image">
-</picture>
-
-
-<p>The way the picture element works is really quite fascinating. The element acts as a wrapper that uses source elements as well as an img element. Use of the img element helps browsers that do not currently support the picture element render an image.
-The source element is used for setting up parameters that define what image should be rendered. On line 2, the srcset attribute is used to define an image that will be displayed on screens that measure from 0px and up. It does not cover all screen sizes because of the source elements that are defined on lines 3 and 4.</p>
-<p>On line 3, you can see that a media attribute has been used to define the image that devices with a minimum screen size of 480px will render. It also contains the srcset attribute that defines a high-pixel-density image if the device supports it.
-Looking ahead to line 4, you can see that the media attribute has been used again to define what image devices with a minimum screen resolution of 768px will see.
-To break this down, the images will display as follows:
+■ All other screens will use standard.jpg.</p>
+<p>可将该属性值分解如下：</p>
+<ul>
+<li>屏幕尺寸为 0–480px 之间的显示图片small_480.jpg。</li>
+<li>屏幕尺寸为 481–768px 之间的显示图片 standard_768.jpg。</li>
+<li>屏幕尺寸为 769–1024px 之间的显示图片 large_1024.jpg。</li>
+<li>高像素密度屏幕显示图片large@2x.jpg。</li>
+<li>其他屏幕使用图片standard.jpg。</li>
+</ul>
+<p>This is a fantastic solution, but use it with careful planning to make sure that you are serving optimized images to the correct devices. Having a fallback image is nice, but it could leave you with an image that is either too small or too large to fit the device that triggered the fallback.</p>
+<p>这种解决方案非常不可思议，但是使用时请仔细确保为正确的设备提供优化后的图片。拥有可靠的图片是非常棒的，但是可靠的图片需要太小或太大的图片来对设备进行适配。</p>
+<p>You might also want to be careful when using the element because it has been implemented only in WebKit-based browsers and Chrome 34+.</p>
+<p>使用srcset属性也需注意的是：目前只有基于WebKit的浏览器和Chrome 34+浏览器支持该属性。</p>
+<p>With a little luck, other browsers will start supporting the attribute soon. If you find that you cannot contain your excitement and you need to use it now, you or your developer can use a polyfill (<a href="https://github.com/borismus/srcset-polyfill" target="_blank">https://github.com/borismus/srcset-polyfill</a>) to fill in the gap and start using srcset now.</p>
+<p>有一点点幸运的是，其他浏览器很快也会开始进行支持srcset属性。如果你发现难以抑制的兴奋现在就想使用该属性，你和你的开发者们可以通过polyfill（<a href="https://github.com/borismus/srcset-polyfill）来使用srcset属性，并完成兼容问题。" target="_blank">https://github.com/borismus/srcset-polyfill）来使用srcset属性，并完成兼容问题。</a></p>
+<h2 id="the-picture-element">The picture Element</h2>
+<h2 id="picture-">picture 元素</h2>
+<p>Another proposed solution for responsive images is a new element that will be used in concert with the img element. The goal of this element is to provide a way for images to be displayed based on device specifics and media queries.</p>
+<p>另外一种建议的响应式图片的解决方案是一个新的元素，该元素的使用与 img 元素的使用是一致的。该元素的目标是提供一种为指定的设备和基于媒体查询的设备上展示图片的方法。</p>
+<p>Listing 9.1 demonstrates how the picture element could be implemented into a site.</p>
+<p>代码清单9.1展示了如何在网站上实现 picture 元素。</p>
+<p>代码清单 9.1 使用 picture 元素</p>
+<hr>
+<pre><code>&lt;picture&gt;
+    &lt;source srcset=&quot;small.jpg&quot;&gt;
+    &lt;source media=&quot;(min-width: 480px)&quot; srcset=&quot;mid.jpg 1x, mid@2x.jpg 2x&quot;&gt; 
+    &lt;source media=&quot;(min-width: 768px)&quot; srcset=&quot;large.jpg&quot;&gt;
+    &lt;img src=&quot;default.jpg&quot; alt=&quot;The image&quot;&gt;
+&lt;/picture&gt;
+</code></pre><hr>
+<p>The way the picture element works is really quite fascinating. The element acts as a wrapper that uses source elements as well as an img element. Use of the img element helps browsers that do not currently support the picture element render an image.</p>
+<p>picture元素的工作方式是非常有趣的。picture元素作为包裹source元素和img元素的容器。使用img元素有助于暂不支持picture元素的浏览器渲染图片。</p>
+<p>The source element is used for setting up parameters that define what image should be rendered. On line 2, the srcset attribute is used to define an image that will be displayed on screens that measure from 0px and up. It does not cover all screen sizes because of the source elements that are defined on lines 3 and 4.</p>
+<p>source元素用于定义需要渲染的图片参数。在代码清单9.1的第2行代码中，使用srcset属性定义展示在大于0px的屏幕上的图片，但是并未覆盖所有的屏幕，因为在第3行、第4行代码也定义了source元素。</p>
+<p>On line 3, you can see that a media attribute has been used to define the image that devices with a minimum screen size of 480px will render. It also contains the srcset attribute that defines a high-pixel-density image if the device supports it.</p>
+<p>在第3行，可以看到media属性用于定义最小尺寸为480px的屏幕显示的图片。同时也使用srcset属性定义高像素密度屏幕所需显示的图片。</p>
+<p>Looking ahead to line 4, you can see that the media attribute has been used again to define what image devices with a minimum screen resolution of 768px will see.</p>
+<p>接着看第4行代码，可以看到media属性用于定义设备屏幕最小尺寸为768px展示的图片。</p>
+<p>To break this down, the images will display as follows:
 ■ Devices with a screen width of 0–479px will load small.jpg.
 ■ Devices with a screen width of 480–767px will load either mid.jpg or mid@2x.jpg, depending on pixel density.
 ■ Devices with a minimum width of 768px will load large.jpg.
 ■ Browsers that do not support the picture element will load default.jpg.</p>
-<p>It might also be somewhat surprising to see the srcset attribute inside the source element or even find it supported. It is actually encouraged to help deliver the proper image to the browser.
-There is more to using the picture element than just specifying which images to use and using media queries to decide. You can also do some limited feature support testing with it to deliver images based on the browser supporting the image format.
-You might be thinking that if a browser is “modern” enough to support the picture element, then it surely must have support for all picture formats. I can easily see why you might have gone down that path in your thinking, but you need to remember that not all browsers support the WEBP image format yet (for a current list, visit <a href="http://caniuse.com/webp" target="_blank">http://caniuse.com/webp</a>).
+<p>分解清单9.1的代码，图片将如下展示：</p>
+<ul>
+<li>屏幕宽度在0–479px之间的设备展示small.jpg。</li>
+<li>屏幕宽度在480–767px之间的设备展示mid.jpg ，高像素密度屏幕展示mid@2x.jpg。</li>
+<li>屏幕宽度大于等于768px的设备展示large.jpg。</li>
+<li>不支持picture元素的浏览器将加载default.jpg。</li>
+</ul>
+<p>It might also be somewhat surprising to see the srcset attribute inside the source element or even find it supported. It is actually encouraged to help deliver the proper image to the browser.</p>
+<p>发现source元素内部支持srcset属性真的很令人吃惊。它实际上是鼓励帮助为浏览器提供适当的图像。</p>
+<p>There is more to using the picture element than just specifying which images to use and using media queries to decide. You can also do some limited feature support testing with it to deliver images based on the browser supporting the image format.</p>
+<p>除了定义具体使用那副图片和使用媒体查询来定义之外，picture元素还有其他功能。你也可以用它做一些有限的特性支持测试，来提供基于浏览器支持图像格式的图像。</p>
+<p>You might be thinking that if a browser is “modern” enough to support the picture element, then it surely must have support for all picture formats. I can easily see why you might have gone down that path in your thinking, but you need to remember that not all browsers support the WEBP image format yet (for a current list, visit <a href="http://caniuse.com/webp" target="_blank">http://caniuse.com/webp</a>).
 Using the type attribute, you can specify whether an image should be displayed based on browser support. Listing 9.2 shows how this is possible.</p>
-<p>Listing 9.2 Specifying Different Animated Image Formats
-IMAGES SHOULD BE RESPONSIVE 123
-￼￼￼￼01 02 03 04 05</p>
-<picture>
-<source type="image/webp" srcset="funny.webp"> <source type="video/png" srcset="funny.apng"> <img src="funny.gif" alt="absolute madness" />
-</picture>
-
-
-<p>Looking closely at Listing 9.2, you can see that the type attribute is used on lines 2 and 3. On line 2, it contains a value of image/webp, and line 3 contains a value of video/png. Unless you are the type of designer who regularly tweaks your web server, these values might appear to be utter nonsense. These values are known as a MIME type.
-The server and browser use the MIME type to communicate and describe the file that is being transferred and rendered. The image/webp value explains that the file is an image of the WEBP variety. The browser already has a list of known MIME types and decides whether it should
-use that file. The value of video/png might appear wrong, but that is the valid MIME type for animated PNG files.
-Chrome supports the WEBP image format (including animated WEBP files), but Firefox does not. Firefox does support animated PNG files, however, and other browsers support animated
-GIF files.
-By using the picture element to specify which image to use, you can optimize the experience for mobile and desktop users.
-At the time of this writing, the picture element is not currently supported in any browser. However, there is a project underway for both Firefox and Chrome browsers to have support implemented hopefully before the end of 2014.
-To learn more about the picture element, including how to load multiple images for multiple sizes in a more streamlined fashion, visit <a href="http://picture.responsiveimages.org/" target="_blank">http://picture.responsiveimages.org/</a>.
-Using a JavaScript Solution
-Designers and developers who are unable to work with modern browsers, or who do not have the time for the rest of the world to catch up with technology, will be using a JavaScript solution as part of their progressive enhancement suite.
-Picturefill, from Scott Jehl, has seen excellent success. I have also created and used my own solution, called Pixity, on several projects.
-Picturefill
-The problem with the picture element is that, if you want to use it now, you can’t. Even with browsers adding support for it in the near future, you are bound to users actually using that particular browser and having it work on their mobile devices.
-This is the problem Scott Jehl saw, so he decided to implement a JavaScript solution that is based on the picture element but uses span elements to allow it to work safely cross-browser.</p>
+<p>你或许会认为如果现代浏览器既然可以支持picture元素，那么一定也能支持所有的图片格式。我可以很清楚看出你的思路，但是你还需记得（截至目前为止，参考网站<a href="http://caniuse.com/webp）并非所有浏览器支持WEBP图片格式。使用type属性，可以轻松地基于浏览器支持的格式来展示图片。代码清单9.2展示了具体如何实现的。" target="_blank">http://caniuse.com/webp）并非所有浏览器支持WEBP图片格式。使用type属性，可以轻松地基于浏览器支持的格式来展示图片。代码清单9.2展示了具体如何实现的。</a></p>
+<p>Listing 9.2 Specifying Different Animated Image Formats</p>
+<p>代码清单9.2 指定不同的动画图像格式</p>
+<pre><code>&lt;picture&gt;
+    &lt;source type=&quot;image/webp&quot; srcset=&quot;funny.webp&quot;&gt;
+    &lt;source type=&quot;video/png&quot; srcset=&quot;funny.apng&quot;&gt;
+    &lt;img src=&quot;funny.gif&quot; alt=&quot;absolute madness&quot; /&gt;
+&lt;/picture&gt;
+</code></pre><p>Looking closely at Listing 9.2, you can see that the type attribute is used on lines 2 and 3. On line 2, it contains a value of image/webp, and line 3 contains a value of video/png. Unless you are the type of designer who regularly tweaks your web server, these values might appear to be utter nonsense. These values are known as a MIME type.</p>
+<p>仔细查看代码清单9.2，你会在第2行和第3行看到type属性，第二行type属性值为image/webp，第3行type属性值为video/png。如果你是那种经常会调整Web服务器的类型的设计师，那么这些值可能出现完全是无用的。这些值均为MIME类型。</p>
+<p>The server and browser use the MIME type to communicate and describe the file that is being transferred and rendered. The image/webp value explains that the file is an image of the WEBP variety. The browser already has a list of known MIME types and decides whether it should
+use that file. The value of video/png might appear wrong, but that is the valid MIME type for animated PNG files.</p>
+<p>服务器和浏览器使用MIME类型进行传送和描述被传输和呈现文件。值image/webp说明文件是WEBP格式的图片。浏览器原本具有其所识别的MIME类型，并决定需要使用的文件类型。值video/png不是写错了，而是MIME类型的PNG动画文件格式。</p>
+<p>Chrome supports the WEBP image format (including animated WEBP files), but Firefox does not. Firefox does support animated PNG files, however, and other browsers support animated GIF files.</p>
+<p>Chrome浏览器支持WEBP格式图片（包括WEBP动画文件），但是FireFox浏览器不支持。FireFox浏览器支持PNG动画文件，其他浏览器支持GIF动画文件。</p>
+<p>By using the picture element to specify which image to use, you can optimize the experience for mobile and desktop users.</p>
+<p>通过使用picture元素来具体定义使用哪张图片，可以很好地优化移动和桌面用户的体验。</p>
+<p>At the time of this writing, the picture element is not currently supported in any browser. However, there is a project underway for both Firefox and Chrome browsers to have support implemented hopefully before the end of 2014.</p>
+<p>在写本书时，并非所有浏览器都支持picture元素。不过，已经有一个项目为FireFox和Chrome均支持picture元素正在进行中，很有可能2014年底前将能完成。</p>
+<p>To learn more about the picture element, including how to load multiple images for multiple sizes in a more streamlined fashion, visit <a href="http://picture.responsiveimages.org/" target="_blank">http://picture.responsiveimages.org/</a>.</p>
+<p>关于picture元素的更多内容，包括如何以更精简的方式加载多个不同大小的图像，请参考网站<a href="http://picture.responsiveimages.org/。" target="_blank">http://picture.responsiveimages.org/。</a></p>
+<h2 id="using-a-javascript-solution">Using a JavaScript Solution</h2>
+<h2 id="javascript">使用JavaScript的解决方案</h2>
+<p>Designers and developers who are unable to work with modern browsers, or who do not have the time for the rest of the world to catch up with technology, will be using a JavaScript solution as part of their progressive enhancement suite.</p>
+<p>无法使用现代浏览器的设计师和开发者们，或是没有时间赶上世界其它地区的技术的人，可以使用JavaScript的解决方案作为渐进增强组件的一部分。</p>
+<p>Picturefill, from Scott Jehl, has seen excellent success. I have also created and used my own solution, called Pixity, on several projects.</p>
+<p>Scott Jehl的Picturefill组件已经取得了杰出的成功。我自己创建了Pixity组件，并已用在多个项目中。</p>
+<h3 id="picturefill">Picturefill组件</h3>
+<p>The problem with the picture element is that, if you want to use it now, you can’t. Even with browsers adding support for it in the near future, you are bound to users actually using that particular browser and having it work on their mobile devices.</p>
+<p>picture元素的缺点在于现在无法直接使用。即使浏览器在不久的将来会添加支持picture元素，你一定会为实际使用的特定浏览器的用户，使得picture元素工作在他们的移动设备上。</p>
+<p>This is the problem Scott Jehl saw, so he decided to implement a JavaScript solution that is based on the picture element but uses span elements to allow it to work safely cross-browser.</p>
+<p>这是Scott Jehl看到的问题，因此他决定通过JavaScript的解决方案来使得picture元素跨浏览器工作，他是通过span元素来实现的。</p>
 <p>Note that Picturefill works best with browsers that support CSS3 media queries. With most smartphones, this should not pose a problem because almost all support CSS3 today.
-Listing 9.3 shows the HTML markup needed to use Picturefill in your project.</p>
-<p>Listing 9.3 Specifying Different Animated Image Formats
-01 <span data-picture data-alt="description of image">
-02 <span data-src="small.jpg"></span>
-03 <span data-src="medium.jpg" data-media="(min-width: 480px)"></span>
-04 <span data-src="large.jpg" data-media="(min-width: 768px)"></span>
-05 <span data-src="extralarge.jpg" data-media="(min-width: 1140px)"></span>
-06
-07 <noscript>
-08 <img src="small.jpg" alt="description of image">
-09 </noscript>
-10 </span></p>
-<p>Lines 2–5 show the initial setup required to make Picturefill work on browsers that support JavaScript, and lines 7–9 show the image that will be shown on devices that do not support JavaScript.
-Line 1 uses data attributes of data-picture and data-alt Picturefill uses to determine where the image will be placed and what text will be used as the image’s alternate message for screen readers and similar devices.
-The other lines contain at least a data attribute of data-src. Others have an accompanying data-media that specifies the image that should be used and the requirements for displaying that particular image.
-If you review both the srcset and picture element sections, this should start looking very similar in execution. You might be wondering about high-pixel-density screens and how
-they fit into the equation. They are added by changing the media query in the data-media attribute. Let’s copy and modify a line so that it will serve a high-density image. Note that I have broken the line out to make it easier to read:
-<span
-data-src="medium@2x.jpg"
-data-media="(min-width: 480px) and (min-device-pixel-ratio: 2.0)">
-</span>
-This could now be added as line 4, and support for high-pixel-density devices would be added for devices between 480px and 767px wide.
+Listing 9.3 shows the HTML markup needed to use Picturefill in your project.
+需要注意的是Picturefill组件在支持CSS3媒体查询功能的浏览器上工作得最好。由于目前大多数智能手机上都支持CSS3，因此应该不会出现问题。</p>
+<p>代码清单9.3展示了在使用Picturefill的项目中需要定义的HTML结构。</p>
+<p>代码清单 9.3 指定不同的动画图像格式</p>
+<pre><code>01 &lt;span data-picture data-alt=&quot;description of image&quot;&gt;
+02         &lt;span data-src=&quot;small.jpg&quot;&gt;&lt;/span&gt;
+03         &lt;span data-src=&quot;medium.jpg&quot; data-media=&quot;(min-width: 480px)&quot;&gt;&lt;/span&gt;
+04         &lt;span data-src=&quot;large.jpg&quot; data-media=&quot;(min-width: 768px)&quot;&gt;&lt;/span&gt;
+05         &lt;span data-src=&quot;extralarge.jpg&quot; data-media=&quot;(min-width: 1140px)&quot;&gt;&lt;/span&gt;
+06 
+07         &lt;noscript&gt;
+08             &lt;img src=&quot;small.jpg&quot; alt=&quot;description of image&quot;&gt;
+09         &lt;/noscript&gt;
+10 &lt;/span&gt;
+</code></pre><p>Lines 2–5 show the initial setup required to make Picturefill work on browsers that support JavaScript, and lines 7–9 show the image that will be shown on devices that do not support JavaScript.</p>
+<p>第2-5行显示了Picturefill在支持JavaScript的浏览器需要的初始配置，第7-9行显示了不支持JavaScript的浏览器将展示的图片。</p>
+<p>Line 1 uses data attributes of data-picture and data-alt Picturefill uses to determine where the image will be placed and what text will be used as the image’s alternate message for screen readers and similar devices.</p>
+<p>在第1行使用了data属性定义了data-picture 和 data-alt ，Picturefill用于定义图片展示的位置以及为屏幕阅读器或类似设备显示的替代文案。</p>
+<p>The other lines contain at least a data attribute of data-src. Others have an accompanying data-media that specifies the image that should be used and the requirements for displaying that particular image.</p>
+<p>其它几行代码均使用data-src属性，data-media属性定义了为特定的显示设备展示的特定图片。</p>
+<p>If you review both the srcset and picture element sections, this should start looking very similar in execution. You might be wondering about high-pixel-density screens and how they fit into the equation. They are added by changing the media query in the data-media attribute. Let’s copy and modify a line so that it will serve a high-density image. Note that I have broken the line out to make it easier to read:</p>
+<p>如果你回顾srcset属性和部分picture元素，这应该代码开始看起来非常相似。你可能想知道关于高像素密度屏幕的适配方式。通过改变添加媒体查询数据媒体属性。让我们复制并修改一行代码，将其支持高像素密度屏幕显示图片。注意我在这行代码上添加了换行符，让它更容易阅读：</p>
+<pre><code>&lt;span
+    data-src=&quot;medium@2x.jpg&quot;
+    data-media=&quot;(min-width: 480px) and (min-device-pixel-ratio: 2.0)&quot;&gt;
+&lt;/span&gt;
+</code></pre><p>This could now be added as line 4, and support for high-pixel-density devices would be added for devices between 480px and 767px wide.
 To download Picturefill and read the full usage guide, visit <a href="https://github.com/scottjehl/" target="_blank">https://github.com/scottjehl/</a> picturefill.</p>
-<p>Pixity
-Before I saw Picturefill, I was working on a redesign of an eCommerce site that now has more than 40% mobile users.
-Knowing that the site is somewhere between 60% and 70% images, I needed a solution that gave me the flexibility of serving different files to different screen sizes but also allowed the content manager an easy way to specify images without having development constantly hard- coding the images into the dynamic files.
-The solution was to create a plugin called Pixity. The first use of the plugin was actually to specify when to use high-pixel-density images; that is where the name originated, the PIXel densITY.
-Pixity currently is released as a jQuery (1.7+) plugin and is fairly easy to implement. By adding a few data attributes to an img element and giving the image a specific class, the Pixity plugin runs on page load and replaces a small 1x1 pixel image with the appropriate image for the device.
-Listing 9.4 demonstrates the HTML markup of an image using Pixity.</p>
-<p>Listing 9.4 Using Pixity to Display an Image
-<img class="pixity" src="images/placeholder.gif" alt="image description" data-path="images/" data-sm="small.jpg" data-md="medium.jpg" data-lg="large.jpg" data-xl="xlarge.jpg" /></p>
-<p>Unlike Picturefill and srcset, you do not specify the minimum device widths for your images. Instead, they are predefined.
-By default, the sizes for the images used are as follows:
-■ data-sm: 0–480px
-■ data-md: 481–767px
-■ data-lg: 768–959px
-■ data-xl: 960px+
-You can change the defaults by modifying the jQuery call like so:
-$.pixity({limitSm:600,limitMd:960,limitLg,1280});</p>
-<p>Note the data-path attribute. This attribute might seem a bit out of place, but it is quite use- ful with a CMS system with a limited amount of characters. If you are using a CDN with a long directory path, instead of putting it in for every image, you put it in once and then fine-tune it with the other data attributes.
-Tip
-When using Pixity, you should use an intrinsic ratio if at all possible. Because of the use of a small placeholder image, failing to use an intrinsic ratio will cause the page to reflow on the user.
-If you are interested in modifying and editing JavaScript, you can modify and extend Pixity to fit your needs. I have several versions that have not been uploaded to GitHub that I use to work with loading dynamic and responsive content into sliders, and one version allows the client to download the high-pixel-density version of a file only if the client passes a speed test.
-Pixity Core is currently licensed as MIT (<a href="http://opensource.org/licenses/MIT" target="_blank">http://opensource.org/licenses/MIT</a>) and is available for download and modification at <a href="https://github.com/dutsonpa/pixity" target="_blank">https://github.com/dutsonpa/pixity</a>.</p>
-<p>Summary
-In this chapter, you learned that displaying images takes planning and care. By taking the time to fine-tune the images that will be displayed to users, you increase the chance of them using and returning to your site.
-You learned that you can take advantage of art direction to change the visual message you are sharing. You can do this with some new features, such as the srcset attribute, or by taking advantage of JavaScript plugins such as Picturefill and Pixity.</p>
+<p>这行代码可添加在第4行支持屏幕宽度在480px至767px之间的高像素密度的设备。下载并阅读详细的使用教程请参考网站<a href="https://github.com/scottjehl/" target="_blank">https://github.com/scottjehl/</a> picturefill。</p>
+<h2 id="pixity">Pixity组件</h2>
+<p>Before I saw Picturefill, I was working on a redesign of an eCommerce site that now has more than 40% mobile users.</p>
+<p>在我看到Picturefill组件之前，我正在重新设计一个电子商务网站，该网站目前已拥有40%的移动用户。</p>
+<p>Knowing that the site is somewhere between 60% and 70% images, I needed a solution that gave me the flexibility of serving different files to different screen sizes but also allowed the content manager an easy way to specify images without having development constantly hard-coding the images into the dynamic files.</p>
+<p>要知道的是该网站60%-70%都是图片，我需要一个灵活的解决方案，以便为不同屏幕大小提供不同的图片文件，并为网站维护者提供简易的图片分类方法，而不是不断地通过硬编码图像为动态文件。</p>
+<p>The solution was to create a plugin called Pixity. The first use of the plugin was actually to specify when to use high-pixel-density images; that is where the name originated, the PIXel densITY.</p>
+<p>解决方案就是创造了一个名为Pixity的插件。最早使用该插件实际是用于确定何时使用高像素密度图片。</p>
+<p>Pixity currently is released as a jQuery (1.7+) plugin and is fairly easy to implement. By adding a few data attributes to an img element and giving the image a specific class, the Pixity plugin runs on page load and replaces a small 1x1 pixel image with the appropriate image for the device.</p>
+<p>Pixity目前已发布了一版jQuery (1.7+) 的插件，实现是非常简单的。通过在img元素上增加几个data属性，并为图片定义一个特定的类名，Pixity插件在页面加载时将1x1px的图片替换为合适的图片。</p>
+<p>Listing 9.4 demonstrates the HTML markup of an image using Pixity.</p>
+<p>代码清单9.4展示了使用Pixity所需的HTML结构。</p>
+<p>代码清单 9.4 使用Pixity展示图片</p>
+<pre><code>&lt;img class=&quot;pixity&quot; 
+    src=&quot;images/placeholder.gif&quot; 
+    alt=&quot;image description&quot; 
+    data-path=&quot;images/&quot; 
+    data-sm=&quot;small.jpg&quot; 
+    data-md=&quot;medium.jpg&quot; 
+    data-lg=&quot;large.jpg&quot; 
+    data-xl=&quot;xlarge.jpg&quot; /&gt;
+</code></pre><p>Unlike Picturefill and srcset, you do not specify the minimum device widths for your images. Instead, they are predefined.</p>
+<p>与Picturefill和srcset不同的是，不需要为不同的图片定义设备宽度。相反，设备宽度是预定义的。</p>
+<p>默认情况下，使用的图片尺寸如下：</p>
+<ul>
+<li>data-sm: 0–480px</li>
+<li>data-md: 481–767px</li>
+<li>data-lg: 768–959px</li>
+<li>data-xl: 960px+</li>
+</ul>
+<p>你也可以通过如下代码更改默认值：</p>
+<pre><code>$.pixity({limitSm:600,limitMd:960,limitLg,1280});
+</code></pre><p>Note the data-path attribute. This attribute might seem a bit out of place, but it is quite useful with a CMS system with a limited amount of characters. If you are using a CDN with a long directory path, instead of putting it in for every image, you put it in once and then fine-tune it with the other data attributes.</p>
+<p>注意data-path属性，data-path属性看起来有点不合时宜，但是这几个字符对CMS系统是非常有用的。如果你使用的是CDN路径，你配置一次，并通过其他属性进行调整。</p>
+<p>小贴士：</p>
+<p>When using Pixity, you should use an intrinsic ratio if at all possible. Because of the use of a small placeholder image, failing to use an intrinsic ratio will cause the page to reflow on the user.</p>
+<p>使用Pixity时，你应尽可能使用图片比例。因为使用一个小图像作为占位符，没有使用一个内在比率将导致页面重新渲染。</p>
+<p>If you are interested in modifying and editing JavaScript, you can modify and extend Pixity to fit your needs. I have several versions that have not been uploaded to GitHub that I use to work with loading dynamic and responsive content into sliders, and one version allows the client to download the high-pixel-density version of a file only if the client passes a speed test.</p>
+<p>如果你对修改、编辑JavaScript感兴趣，你可以根据自己的需求对Pixity进行修改和扩展。我有几个版本是用于sliders的动态加载和响应式内容的，尚未上传至GitHub，还有几个版本当且仅当客户端通过性能测试才允许客户端下载高像素密度的文件版本。</p>
+<p>Pixity Core is currently licensed as MIT (<a href="http://opensource.org/licenses/MIT" target="_blank">http://opensource.org/licenses/MIT</a>) and is available for download and modification at <a href="https://github.com/dutsonpa/pixity" target="_blank">https://github.com/dutsonpa/pixity</a>.</p>
+<p>Pixity核心目前已授权为MIT(<a href="http://opensource.org/licenses/MIT)，可以通过https://github.com/dutsonpa/pixity进行下载和修改。" target="_blank">http://opensource.org/licenses/MIT)，可以通过https://github.com/dutsonpa/pixity进行下载和修改。</a></p>
+<h2 id="summary">Summary</h2>
+<h2 id="">总结</h2>
+<p>In this chapter, you learned that displaying images takes planning and care. By taking the time to fine-tune the images that will be displayed to users, you increase the chance of them using and returning to your site.</p>
+<p>You learned that you can take advantage of art direction to change the visual message you are sharing. You can do this with some new features, such as the srcset attribute, or by taking advantage of JavaScript plugins such as Picturefill and Pixity.</p>
+<p>在本章中你学会了有计划地展示图片的方法。花一点时间对需要呈现给用户的图片进行微调，可增加网站的用户访问率和回返率。</p>
+<p>你知道你可以利用艺术方向来改变共享的视觉信息。你可以通过几个新特性来实现，例如srcset属性，或者使用JavaScript插件来实现，例如Picturefill和Pixity插件。</p>
 
                     
                     </section>
